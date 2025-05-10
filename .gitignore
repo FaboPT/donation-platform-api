@@ -21,3 +21,20 @@ yarn-error.log
 /.nova
 /.vscode
 /.zed
+
+###> squizlabs/php_codesniffer ###
+/.phpcs-cache
+/phpcs.xml
+###< squizlabs/php_codesniffer ###
+/.phpunit.result.cache
+###> phpunit/phpunit ###
+/phpunit.xml
+###< phpunit/phpunit ###
+
+
+###> friendsofphp/php-cs-fixer ###
+/.php-cs-fixer.php
+/.php-cs-fixer.cache
+.php-cs-fixer.cache
+###< friendsofphp/php-cs-fixer ###
+.qodo
