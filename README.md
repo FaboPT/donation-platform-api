@@ -98,7 +98,25 @@ http://localhost:8888/api/docs
 - Go your database and seed the fake users created and choose one
 - Password for users -> **password**
 
+# Dev commands
 
+### Analyze PHP CS
+
+```
+composer lint
+```
+
+### Fix PHP CS
+
+```
+composer lint:fix
+```
+
+### Run PHP Unit
+
+````
+php artisan test
+```
 
 
 
