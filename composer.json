@@ -1,8 +1,8 @@
 {
     "$schema": "https://getcomposer.org/schema.json",
-    "name": "laravel/laravel",
+    "name": "donation-plataform-api/core",
     "type": "project",
-    "description": "The skeleton application for the Laravel framework.",
+    "description": "Donation platform api built with Laravel",
     "keywords": ["laravel", "framework"],
     "license": "MIT",
     "require": {
@@ -12,6 +12,7 @@
         "phpstan/phpstan-phpunit": "^2.0"
     },
     "require-dev": {
+        "roave/security-advisories": "dev-latest",
         "fakerphp/faker": "^1.23",
         "friendsofphp/php-cs-fixer": "^3.75",
         "laravel/pail": "^1.2.2",
