@@ -1,0 +1,46 @@
+networks:
+    donation-api:
+
+services:
+    nginx:
+        image: nginx:stable-alpine
+        container_name: nginx_donation_api
+        ports:
+            - "8888:80"
+        volumes:
+            - ./:/var/www:delegated
+            - ./docker/nginx/vhost.conf:/etc/nginx/conf.d/default.conf
+        depends_on:
+            - app
+            - mysql
+        networks:
+            - donation-api
+    mysql:
+        image: mysql:lts
+        container_name: mysql_donation_api
+        restart: unless-stopped
+        tty: true
+        ports:
+            - "3310:3306"
+        environment:
+            MYSQL_DATABASE: ${DB_DATABASE}
+            MYSQL_ROOT_PASSWORD: ${DB_PASSWORD}
+            SERVICE_TAGS: dev
+            SERVICE_NAME: mysql
+        networks:
+            - donation-api
+        volumes:
+            - mysql_data:/var/lib/mysql:rw
+    app:
+        build:
+            context: ./
+            dockerfile: Dockerfile
+        container_name: php_donation_api
+        working_dir: /var/www
+        volumes:
+            - ./:/var/www:delegated
+            - ./vendor:/var/www/vendor:cached
+        networks:
+            - donation-api
+volumes:
+    mysql_data:
