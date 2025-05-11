@@ -10,8 +10,8 @@ Route::middleware('auth:sanctum')->group(function() {
     Route::prefix('campaigns')->group(function() {
         Route::get('', [CampaignController::class, 'index'])->name('campaign.index');
         Route::post('', [CampaignController::class, 'store'])->name('campaign.store');
-        Route::put('/{id}', [CampaignController::class, 'update'])->name('campaign.update');
-        Route::delete('/{id}', [CampaignController::class, 'destroy'])->name('campaign.destroy');
+        Route::put('/{campaign}', [CampaignController::class, 'update'])->name('campaign.update');
+        Route::delete('/{campaign}', [CampaignController::class, 'destroy'])->name('campaign.destroy');
     });
 
 });
