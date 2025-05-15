@@ -19,6 +19,10 @@ class CampaignDto
     ) {
     }
 
+    /**
+     * @param UpdateCampaignRequest[]|StoreCampaignRequest[] $data
+     * @return CampaignDto
+     */
     public static function fromArray(array $data): self
     {
         return new self(
