@@ -2,7 +2,9 @@
 
 namespace App\Http\Requests\Campaign;
 
+use App\Enums\Status;
 use Illuminate\Foundation\Http\FormRequest;
+use Illuminate\Validation\Rule;
 
 class StoreCampaignRequest extends FormRequest
 {
@@ -11,7 +13,7 @@ class StoreCampaignRequest extends FormRequest
      */
     public function authorize(): bool
     {
-        return false;
+        return true;
     }
 
     /**
@@ -22,7 +24,13 @@ class StoreCampaignRequest extends FormRequest
     public function rules(): array
     {
         return [
-            //
+            'name' => 'required|string|max:255',
+            'description' => 'nullable|string|max:1000',
+            'goal_amount' => 'nullable|numeric|min:0',
+            'start_date' => 'required|date',
+            'status'  => 'nullable|string|' . Rule::in(Status::cases()),
+            'end_date' => 'nullable|date|after_or_equal:start_date',
+            'user_id' => 'nullable|exists:users,id',
         ];
     }
 }
