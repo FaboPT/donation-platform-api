@@ -22,7 +22,9 @@ class StoreDonationRequest extends FormRequest
     public function rules(): array
     {
         return [
-            //
+            'amount' => 'required|numeric|min:1',
+            'user_id' => 'nullable|exists:users,id',
+            'description' => 'nullable|string|max:1000',
         ];
     }
 }

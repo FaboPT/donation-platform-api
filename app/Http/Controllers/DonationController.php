@@ -2,26 +2,32 @@
 
 namespace App\Http\Controllers;
 
+use App\Dto\DonationDto;
 use App\Http\Requests\Donation\StoreDonationRequest;
-use App\Http\Requests\Donation\UpdateDonationRequest;
+use App\Http\Resources\DonationResource;
+use App\Models\Campaign;
 use App\Models\Donation;
+use App\Services\DonationService;
 
 class DonationController extends Controller
 {
-    /**
-     * Display a listing of the resource.
-     */
-    public function index()
+
+    public function __construct(private readonly DonationService $donationService)
     {
-        //
     }
 
     /**
      * Store a newly created resource in storage.
      */
-    public function store(StoreDonationRequest $request)
+    public function donate(StoreDonationRequest $request, Campaign $campaign): DonationResource
     {
-        //
+        $request->merge(['user_id' => $request->user()?->getAuthIdentifier()]);
+        $campaignId = $campaign->__get('id');
+        $donationDto = DonationDto::fromArray($request->all());
+
+        $donation = $this->donationService->donate($campaignId, $donationDto);
+
+        return new DonationResource($donation);
     }
 
     /**
@@ -29,22 +35,8 @@ class DonationController extends Controller
      */
     public function show(Donation $donation)
     {
-        //
-    }
+        $donation = $this->donationService->show($donation);
 
-    /**
-     * Update the specified resource in storage.
-     */
-    public function update(UpdateDonationRequest $request, Donation $donation)
-    {
-        //
-    }
-
-    /**
-     * Remove the specified resource from storage.
-     */
-    public function destroy(Donation $donation)
-    {
-        //
+        return new DonationResource($donation);
     }
 }

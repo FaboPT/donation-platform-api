@@ -10,6 +10,7 @@ use App\Models\Campaign;
 use App\Services\CampaignService;
 use Illuminate\Http\JsonResponse;
 use Illuminate\Http\Resources\Json\AnonymousResourceCollection;
+use Illuminate\Support\Facades\Auth;
 
 class CampaignController extends Controller
 {
@@ -31,6 +32,7 @@ class CampaignController extends Controller
      */
     public function store(StoreCampaignRequest $request): CampaignResource
     {
+        $request->merge(['user_id' => Auth::user()?->getAuthIdentifier()]);
         $campaignDto = CampaignDto::fromArray($request->all());
         $campaign = $this->campaignService->store($campaignDto);
         return new CampaignResource($campaign);

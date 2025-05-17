@@ -20,8 +20,16 @@ class CampaignDto
     }
 
     /**
-     * @param UpdateCampaignRequest[]|StoreCampaignRequest[] $data
-     * @return CampaignDto
+     * @param array{
+     *     name: string,
+     *     description?: string,
+     *     goal_amount?: float,
+     *     current_amount: float,
+     *     start_date: string,
+     *     end_date?: string,
+     *     user_id: int,
+     *     status?: string
+     * } $data
      */
     public static function fromArray(array $data): self
     {
@@ -50,6 +58,18 @@ class CampaignDto
         );
     }
 
+    /**
+     * @return array{
+     *     name: string,
+     *     description?: string,
+     *     goal_amount?: float,
+     *     current_amount: float,
+     *     start_date: string,
+     *     end_date?: string,
+     *     user_id: int,
+     *     status?: string
+     * }
+     */
     public function toArray(): array
     {
         return [

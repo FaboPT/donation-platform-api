@@ -27,7 +27,7 @@ class CampaignService
         });
     }
 
-    public function show(int $id): Campaign
+    public function show(int $id): ?Campaign
     {
         return $this->campaignRepository->find($id);
     }

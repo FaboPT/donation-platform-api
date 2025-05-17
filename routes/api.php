@@ -14,10 +14,8 @@ Route::middleware('auth:sanctum')->group(function() {
         Route::get('/{campaign}', [CampaignController::class, 'show'])->name('campaign.show');
         Route::put('/{campaign}', [CampaignController::class, 'update'])->name('campaign.update');
         Route::delete('/{campaign}', [CampaignController::class, 'destroy'])->name('campaign.destroy');
+        Route::post('/{campaign}/donations', [DonationController::class, 'donate'])->name('donation.show');
     });
-
-    Route::prefix('donations')->group(function() {
-        Route::get('/{donation}', [DonationController::class, 'show'])->name('donation.show');
-    });
+    Route::get('donations/{donation}', [DonationController::class, 'show'])->name('donation.show');
 
 });
