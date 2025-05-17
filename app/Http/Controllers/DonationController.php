@@ -33,7 +33,7 @@ class DonationController extends Controller
     /**
      * Display the specified resource.
      */
-    public function show(Donation $donation)
+    public function show(Donation $donation): DonationResource
     {
         $donation = $this->donationService->show($donation);
 

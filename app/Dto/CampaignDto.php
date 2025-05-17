@@ -13,8 +13,8 @@ class CampaignDto
         private readonly ?float  $goalAmount,
         private readonly float   $currentAmount,
         private readonly string  $startDate,
-        private readonly string  $endDate,
-        private readonly int     $userId,
+        private readonly ?string  $endDate,
+        private readonly ?int     $userId,
         private readonly ?string $status
     ) {
     }
@@ -22,13 +22,13 @@ class CampaignDto
     /**
      * @param array{
      *     name: string,
-     *     description?: string,
-     *     goal_amount?: float,
+     *     description: ?string,
+     *     goal_amount: ?float,
      *     current_amount: float,
      *     start_date: string,
-     *     end_date?: string,
-     *     user_id: int,
-     *     status?: string
+     *     end_date: ?string,
+     *     user_id: ?int,
+     *     status: ?string
      * } $data
      */
     public static function fromArray(array $data): self
@@ -61,13 +61,13 @@ class CampaignDto
     /**
      * @return array{
      *     name: string,
-     *     description?: string,
-     *     goal_amount?: float,
+     *     description: ?string,
+     *     goal_amount: ?float,
      *     current_amount: float,
      *     start_date: string,
-     *     end_date?: string,
-     *     user_id: int,
-     *     status?: string
+     *     end_date: ?string,
+     *     user_id: ?int,
+     *     status: ?string
      * }
      */
     public function toArray(): array
@@ -75,7 +75,7 @@ class CampaignDto
         return [
             'name' => $this->getName(),
             'description' => $this->getDescription(),
-            'goal' => $this->getGoalAmount(),
+            'goal_amount' => $this->getGoalAmount(),
             'current_amount' => $this->getCurrentAmount(),
             'start_date' => $this->getStartDate(),
             'end_date' => $this->getEndDate(),
@@ -113,7 +113,7 @@ class CampaignDto
         return $this->endDate;
     }
 
-    public function getUserId(): int
+    public function getUserId(): ?int
     {
         return $this->userId;
     }

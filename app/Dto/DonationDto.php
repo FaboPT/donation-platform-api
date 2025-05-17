@@ -8,7 +8,7 @@ class DonationDto
 {
     public function __construct(
         private ?int    $campaign_id,
-        private readonly int     $user_id,
+        private readonly ?int     $user_id,
         private readonly float   $amount,
         private readonly ?string $description,
     ) {
@@ -17,7 +17,7 @@ class DonationDto
     /**
      * @param array{
      *     campaign_id: ?int,
-     *     user_id: int,
+     *     user_id: ?int,
      *     amount: float,
      *     description: ?string
      * } $data
@@ -26,7 +26,7 @@ class DonationDto
     {
         return new self(
             $data['campaign_id'] ?? null,
-            $data['user_id'],
+            $data['user_id'] ?? null,
             $data['amount'],
             $data['description'] ?? null,
         );
@@ -45,7 +45,7 @@ class DonationDto
     {
         return $this->campaign_id;
     }
-    public function getUserId(): int
+    public function getUserId(): ?int
     {
         return $this->user_id;
     }
@@ -62,8 +62,8 @@ class DonationDto
      * Convert the DTO to an array.
      *
      * @return array{
-     *      campaign_id: int,
-     *      user_id: int,
+     *      campaign_id: ?int,
+     *      user_id: ?int,
      *      amount: float,
      *      description: ?string
      *  }
